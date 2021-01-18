@@ -1,0 +1,47 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Order
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123
+    # Hikari will use the above plus the following to setup connection pooling
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 15
+      auto-commit: true
+      idle-timeout: 30000
+      pool-name: DatebookHikariCP
+      max-lifetime: 1800000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+
+#eureka注册中心
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10001/eureka/
+
+
+#mybatis
+#扫描实体类的所在包
+mybatis:
+  type-aliases-package: com.ganxy.order.pojo
+  #mapper接口对应的.xml文件
+  mapper-locations:
+    classpath: mapper/*.xml
+  config-location:
+    classpath: mybatis/mybatis-config.xml
+
+
+#通用mapper的所在接口名称(不是业务的mapper) ,不只是包名
+mapper:
+  mappers: com.ganxy.order.mymapper.MyMapper
+  identity: MYSQL
+

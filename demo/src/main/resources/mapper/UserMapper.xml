@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myself.demo.mapper.UserMapper.java">
+
+    <resultMap id="BaseResultMap" type="com.myself.demo.model.User.java">
+        <id column="ID" property="id" jdbcType="VARCHAR"/>
+        <result column="USER_NAME" property="username" jdbcType="VARCHAR"/>
+        <result column="PASSWORD" property="password" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectUser" resultMap="BaseResultMap">
+        select *from user
+        where ID =#{id}
+    </select>
+
+    <delete id="deleteUser" parameterType="String">
+        delete from user
+        where ID =#{id}
+    </delete>
+
+    <update id="updateUser" parameterType="com.myself.demo.model.User">
+        update user set USER_NAME =#{username},PASSWORD =#{password}
+        where ID =#{id}
+    </update>
+
+    <insert id="addUser" parameterType="com.myself.demo.model.User">
+        insert into user values (null,#{username},#{password})
+    </insert>
+
+</mapper>
